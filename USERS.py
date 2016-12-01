@@ -11,7 +11,7 @@
 
 from Crypto.Hash import SHA256
 from Crypto.PublicKey import RSA 
-
+from time import sleep
 from time import time
 class User:
     def __init__(self,username):
@@ -111,7 +111,8 @@ class Block:
     def finishBlock(self,user):
         self.ready = False
         self.complete = True
-        print("Block " + self.name+ " is completed!")
+        print("Block " + self.name+ " is completed!\n\n\n")
+        sleep(5)
         i = self.name.strip().encode('UTF-8')
         st = SHA256.new()
         st.update(i)
@@ -120,7 +121,7 @@ class Block:
         
     def rewrite(self):
         o = open(self.filename,"w")
-        o.write(str(self.timestamp) + "\n"+ str(self.p) + "\n"+str(self.nonce)+"\n")
+        o.write(str(self.timestamp) + "\n"+ str(self.p) + "\n"+str(self.nonce)+"\n")        
         for i in self.transact:
             o.write(i+"\n")
         o.close()
@@ -136,10 +137,11 @@ class Block:
         o.close()
         
         if(res[0:3] == "0"*3):
-            print("The Hash is "+ res +" Success!")
+            print("The Hash is "+ res +" Success!\n\n\n")
             self.finishBlock(user)
+            sleep(5)
         else:
-            print("The Hash is "+ res +" Fail!!")
+            print("The Hash is "+ res +" Fail!!\n\n\n")
             self.nonce +=1
             self.rewrite()
             

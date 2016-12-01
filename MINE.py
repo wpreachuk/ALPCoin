@@ -9,6 +9,7 @@ Created on Tue Nov 29 09:45:54 2016
 Ledger Creation
 """
 from USERS import *
+from time import sleep
 global Users
 def validateTansaction(t):
     t = t.split(",")
@@ -88,7 +89,8 @@ Users[1].addCoins(coins[3:])
 print("\n\n\n")
 for i in Users:
     print(i)
-print("\n\n\n")
+    sleep(5)
+    print("\n\n\n")
 transactions = []
 
 transactions.append(Users[0].giveCoins(2,Users[3].getWaddress()) )# Will Gives 2 coins to Amazon
@@ -96,14 +98,26 @@ transactions.append(Users[1].giveCoins(1,Users[3].getWaddress()) )# Kevin Gives 
 transactions.append(Users[2].giveCoins(4,Users[3].getWaddress()) ) #Urban Miner tries to give 4 coins to amazon, this one is false and will not be added to block
 transactions.append(Users[0].giveCoins(1,Users[3].getWaddress()) )# Will gives his last coin to amazon
 
+for i in transactions:
+    print(i)
+    sleep(5)
+    print("\n\n\n")
+
 currblock = Block("CurrentBlock",b1hash)
 
 
 
 for i in transactions:
+    print("Is transaction "+i +" valid?")
     if(validateTansaction(i) and not currblock.ready):
+        print("Yes! Added to block!")
         currblock.addTransact(i)
-    #   processTransaction(i)
+        sleep(5)
+        print("\n\n\n")
+    else:
+        print("No! Fail!")
+        sleep(5)
+        print("\n\n\n")
 
 exitCond = 0
 while(exitCond!=1):
@@ -115,7 +129,8 @@ while(exitCond!=1):
 
 for i in Users:
     print(i)
-print("\n\n\n")
+    print("\n\n\n")
+    sleep(5)
 
 
   
