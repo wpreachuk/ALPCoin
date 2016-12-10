@@ -99,7 +99,8 @@ class Block:
         self.transact = []
         self.rewrite()
         
-   
+        """
+   #This Method will be used in future implementation when multiple miners exist.
     def prepBlock(self):
         o = open(self.filename,"w")
         o.write(str(self.timestamp) + "\n"+ str(self.p) + "\n"+str(self.nonce)+"\n")
@@ -107,6 +108,7 @@ class Block:
             o.write(i+"\n")
         o.close()
         self.ready = True
+   """
         
     def finishBlock(self,user):
         self.ready = False
@@ -146,10 +148,11 @@ class Block:
             self.rewrite()
             
     def addTransact(self,trans):
-        if(len(self.transact)!=3): 
+        #if(len(self.transact)!=3): 
             self.transact.append(trans)
-        if(len(self.transact)==3):
-            self.prepBlock()
+            self.rewrite()
+        #if(len(self.transact)==3):
+        #    self.prepBlock()
     def getHash(self):
         o = open(self.filename,"r")
         st = SHA256.new()
